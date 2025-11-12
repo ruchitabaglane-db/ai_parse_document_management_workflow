@@ -1,0 +1,503 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Generated Schema",
+  "type": "object",
+  "properties": {
+    "invoiceHeader": {
+      "description": "Contains all header information for the invoice document, including order details, vendor information, dates, and financial summaries.",
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "orderNumber": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Sales order number (keep as string to preserve formatting such as leading zeros or prefixes). Constraints - minLength: 1. Example: 'SO-019482'"
+            },
+            "bolNumber": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The Bill of Lading number that serves as a receipt and contract between the carrier and shipper for the transported goods. (nullable). Example: null"
+            },
+            "vendorNumber": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "A unique identifier assigned to the vendor in the buyer's system for tracking and accounting purposes. (nullable). Example: null"
+            },
+            "vendorName": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The legal business name of the vendor or supplier who issued the invoice. Constraints - minLength: 1. Example: 'House Foods Holding USA, Inc'"
+            },
+            "invoiceNumber": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "A unique identifier for the invoice document, formatted with a prefix 'IN-' followed by an alphanumeric sequence. Constraints - minLength: 1. Example: 'IN-D000136'"
+            },
+            "invoiceDate": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The date when the invoice was issued, formatted as YYYY-MM-DD Example: '2025-08-28'"
+            },
+            "purchaseOrderNumber": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The buyer's purchase order number that authorized the purchase of goods or services referenced in the invoice. PO number as string to preserve leading zeros. Constraints - minLength: 1. Example: '218411100'"
+            },
+            "branch": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "A numeric code identifying the specific branch location of the buyer involved in the transaction. 3-digit branch code. Constraints - pattern: ^\\d{3}$. Example: '003'"
+            },
+            "warehouse": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "A numeric code identifying the specific warehouse where goods are shipped to or from. 3-digit warehouse code. Constraints - pattern: ^\\d{3}$. Example: '026'"
+            },
+            "discountAmount": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The total monetary amount of any discounts applied to the invoice, expressed as a numeric value with up to one decimal place. Constraints - minimum: 0. Example: 0.0"
+            },
+            "discountDate": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The date by which payment must be made to qualify for an early payment discount, formatted as YYYY-MM-DD when applicable. nullable.  Example: null"
+            },
+            "freightAmount": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The monetary charge for shipping and handling the goods, expressed as a numeric value. Constraints - minimum: 0. Example: 0"
+            },
+            "totalAmount": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The final invoice amount including all line items, taxes, and additional charges, expressed as a numeric value with up to one decimal place. Constraints - minimum: 0. Example: 2675.2"
+            },
+            "subtotalAmount": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The sum of all line item amounts before any taxes, discounts, or additional charges are applied, expressed as a numeric value with up to one decimal place. Constraints - minimum: 0. Example: 2675.2"
+            },
+            "shippingAddress": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "address": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "The street address line for the shipping destination. Constraints - minLength: 1. Example: 'CO PKMS 22000 East 38th Ave'"
+                    },
+                    "city": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "The city name for the shipping destination. Constraints - minLength: 1. Example: 'AURORA'"
+                    },
+                    "state": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "The state or province code for the shipping destination, typically represented as a two-letter abbreviation. 2-letter US state code. Constraints - pattern: ^[A-Z]{2}$. Example: 'CO'"
+                    },
+                    "zip": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "The postal code for the shipping destination, which may include a hyphen for extended ZIP+4 codes.  Constraints - pattern: ^\\d{5}(-\\d{4})?$. Example: '80019-3608'"
+                    }
+                  },
+                  "required": [
+                    "address",
+                    "city",
+                    "state",
+                    "zip"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The physical address where the goods are to be delivered."
+            },
+            "remittanceAddress": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "address": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "The street address or PO Box line for remitting payment. Constraints - minLength: 1. Example: 'PO Box #25765'"
+                    },
+                    "city": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "The city name for the remittance address. Constraints - minLength: 1. Example: 'Pasadena'"
+                    },
+                    "state": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "The state or province code for the remittance address, typically represented as a two-letter abbreviation. Constraints - pattern: ^[A-Z]{2}$. Example: 'CA'"
+                    },
+                    "zip": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "The postal code for the remittance address, which may include a hyphen for extended ZIP+4 codes. Constraints - pattern: ^\\d{5}(-\\d{4})?$. Example: '91185-5765'"
+                    }
+                  },
+                  "required": [
+                    "address",
+                    "city",
+                    "state",
+                    "zip"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The address where payment for the invoice should be sent. "
+            },
+            "paymentTerms": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "termsDiscountPercentage": {
+                      "anyOf": [
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "The percentage discount offered for early payment, expressed as a numeric value when applicable. e.g., 2 for 2% discount; nullable. Constraints - minimum: 0. Example: null"
+                    },
+                    "termsDiscountDueDays": {
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "The number of days after the invoice date within which payment must be made to qualify for the early payment discount. nullable. Constraints - minimum: 0. Example: null"
+                    },
+                    "termsNetDuedays": {
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "The number of days after the invoice date within which full payment is due. Constraints - minimum: 0. Example: 30"
+                    }
+                  },
+                  "required": [
+                    "termsNetDuedays",
+                    "termsDiscountPercentage",
+                    "termsDiscountDueDays"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The conditions under which payment for the invoice is expected."
+            }
+          },
+          "required": [
+            "orderNumber",
+            "bolNumber",
+            "vendorNumber",
+            "vendorName",
+            "invoiceNumber",
+            "invoiceDate",
+            "purchaseOrderNumber",
+            "branch",
+            "warehouse",
+            "discountDate",
+            "totalAmount",
+            "subtotalAmount",
+            "shippingAddress",
+            "remittanceAddress",
+            "paymentTerms",
+            "discountAmount",
+            "freightAmount"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "lineItems": {
+      "description": "An array of items purchased as part of this invoice, with each item containing detailed product and pricing information. Constraints - minItems: 1",
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "lineNumber": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "A sequential number identifying the position of the item in the invoice, starting from 1."
+              },
+              "productCode": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "A unique identifier for the product being purchased, which may be alphanumeric. Constraints - minLength: 1. Example: 'SNTC', 'K475', 'K502'"
+              },
+              "uom": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "The unit of measure for the product, indicating how the product is quantified (e.g., CASE, EACH, BOX). Constraints - minLength: 1. "
+              },
+              "quantityShipped": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "The number of units of the product that were shipped, expressed as a numeric value with up to one decimal place. Constraints - minimum: 0. Example: 4.0, 140.0, 20.0"
+              },
+              "weightShipped": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "The weight of the shipped product, expressed as a numeric value with up to one decimal place. Constraints - minimum: 0. Example: 0.0"
+              },
+              "unitPrice": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "The price per unit of the product, expressed as a numeric value with up to two decimal places. Constraints - minimum: 0. Example: 54.0, 11.28, 44.0"
+              },
+              "lineTotal": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "The total monetary amount for this line item, calculated as quantity multiplied by unit price, expressed as a numeric value with up to one decimal place. Constraints - minimum: 0. Example: 216.0, 1579.2, 880.0"
+              }
+            },
+            "required": [
+              "lineNumber",
+              "productCode",
+              "uom",
+              "quantityShipped",
+              "weightShipped",
+              "unitPrice",
+              "lineTotal"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "flags": {
+      "description": "A status indicator for the invoice, with 'OK' indicating the invoice has been processed successfully without issues.",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "barcodes": {
+      "description": "An array of barcode values associated with the invoice, typically containing the invoice number for scanning and tracking purposes.",
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "invoiceHeader",
+    "lineItems",
+    "flags",
+    "barcodes"
+  ]
+}
