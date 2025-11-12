@@ -1,0 +1,217 @@
+
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Invoice",
+  "type": "object",
+
+  "required": ["invoiceHeader", "lineItems", "flags", "barcodes"],
+  "properties": {
+    "invoiceHeader": {
+      "type": "object",
+
+      "required": [
+        "orderNumber",
+        "bolNumber",
+        "vendorNumber",
+        "vendorName",
+        "invoiceNumber",
+        "invoiceDate",
+        "purchaseOrderNumber",
+        "branch",
+        "warehouse",
+        "discountAmount",
+        "discountDate",
+        "freightAmount",
+        "totalAmount",
+        "subtotalAmount",
+        "shippingAddress",
+        "remittanceAddress",
+        "paymentTerms"
+      ],
+      "properties": {
+        "orderNumber": {
+          "type": "string",
+          "description": "Sales order number (keep as string to preserve formatting such as leading zeros or prefixes). Constraints - minLength: 1. Example: 'SO-019482'"
+        },
+        "bolNumber": {
+          "type": ["string", "null"],
+          "description": "Bill of Lading number (nullable). Example: null"
+        },
+        "vendorNumber": {
+          "type": ["string", "null"],
+          "description": "Vendor identifier (nullable). Example: null"
+        },
+        "vendorName": {
+          "type": "string",
+          "description": "Vendor company name. Constraints - minLength: 1. Example: 'House Foods Holding USA, Inc'"
+        },
+        "invoiceNumber": {
+          "type": "string",
+          "description": "Unique invoice identifier. Constraints - minLength: 1. Example: 'IN-D000136'"
+        },
+        "invoiceDate": {
+          "type": "string",
+          "format": "date",
+          "description": "YYYY-MM-DD per RFC 3339. Example: '2025-08-28'"
+        },
+        "purchaseOrderNumber": {
+          "type": "string",
+          "description": "PO number as string to preserve leading zeros. Constraints - minLength: 1. Example: '218411100'"
+        },
+        "branch": {
+          "type": "string",
+          "description": "3-digit branch code. Constraints - pattern: ^\\d{3}$. Example: '003'"
+        },
+        "warehouse": {
+          "type": "string",
+          "description": "3-digit warehouse code. Constraints - pattern: ^\\d{3}$. Example: '026'"
+        },
+        "discountAmount": {
+          "type": "number",
+          "description": "Discount amount applied to invoice. Constraints - minimum: 0. Example: 0.0"
+        },
+        "discountDate": {
+          "type": ["string", "null"],
+          "format": "date",
+          "description": "YYYY-MM-DD; nullable. Date when discount expires. Example: null"
+        },
+        "freightAmount": {
+          "type": "number",
+          "description": "Freight/shipping charges. Constraints - minimum: 0. Example: 0"
+        },
+        "totalAmount": {
+          "type": "number",
+          "description": "Total invoice amount including all charges. Constraints - minimum: 0. Example: 2675.2"
+        },
+        "subtotalAmount": {
+          "type": "number",
+          "description": "Subtotal amount before additional charges. Constraints - minimum: 0. Example: 2675.2"
+        },
+        "shippingAddress": {
+          "type": "object",
+    
+          "required": ["address", "city", "state", "zip"],
+          "properties": {
+            "address": {
+              "type": "string",
+              "description": "Street address line. Constraints - minLength: 1. Example: 'CO PKMS 22000 East 38th Ave'"
+            },
+            "city": {
+              "type": "string",
+              "description": "City name. Constraints - minLength: 1. Example: 'AURORA'"
+            },
+            "state": {
+              "type": "string",
+              "description": "2-letter US state code. Constraints - pattern: ^[A-Z]{2}$. Example: 'CO'"
+            },
+            "zip": {
+              "type": "string",
+              "description": "US ZIP or ZIP+4. Constraints - pattern: ^\\d{5}(-\\d{4})?$. Example: '80019-3608'"
+            }
+          }
+        },
+        "remittanceAddress": {
+          "type": "object",
+    
+          "required": ["address", "city", "state", "zip"],
+          "properties": {
+            "address": {
+              "type": "string",
+              "description": "Street address line. Constraints - minLength: 1. Example: 'PO Box #25765'"
+            },
+            "city": {
+              "type": "string",
+              "description": "City name. Constraints - minLength: 1. Example: 'Pasadena'"
+            },
+            "state": {
+              "type": "string",
+              "description": "2-letter US state code. Constraints - pattern: ^[A-Z]{2}$. Example: 'CA'"
+            },
+            "zip": {
+              "type": "string",
+              "description": "US ZIP or ZIP+4. Constraints - pattern: ^\\d{5}(-\\d{4})?$. Example: '91185-5765'"
+            }
+          }
+        },
+        "paymentTerms": {
+          "type": "object",
+    
+          "required": ["termsDiscountPercentage", "termsDiscountDueDays", "termsNetDuedays"],
+          "properties": {
+            "termsDiscountPercentage": {
+              "type": ["number", "null"],
+              "description": "e.g., 2 for 2% discount; nullable. Constraints - minimum: 0. Example: null"
+            },
+            "termsDiscountDueDays": {
+              "type": ["integer", "null"],
+              "description": "Days until discount expires; nullable. Constraints - minimum: 0. Example: null"
+            },
+            "termsNetDuedays": {
+              "type": "integer",
+              "description": "Net days due. Constraints - minimum: 0. Example: 30"
+            }
+          }
+        }
+      }
+    },
+    "lineItems": {
+      "type": "array",
+      "description": "Array of invoice line items. Constraints - minItems: 1",
+      "items": {
+        "type": "object",
+  
+        "required": [
+          "lineNumber",
+          "productCode",
+          "uom",
+          "quantityShipped",
+          "weightShipped",
+          "unitPrice",
+          "lineTotal"
+        ],
+        "properties": {
+          "lineNumber": {
+            "type": "integer",
+            "description": "Sequential line item number. Constraints - minimum: 1. Example: 1, 2, 3"
+          },
+          "productCode": {
+            "type": "string",
+            "description": "Product identifier/SKU. Constraints - minLength: 1. Example: 'SNTC', 'K475', 'K502'"
+          },
+          "uom": {
+            "type": "string",
+            "description": "Unit of measure (e.g., CASE). Constraints - minLength: 1. Example: 'CASE'"
+          },
+          "quantityShipped": {
+            "type": "number",
+            "description": "Quantity of items shipped. Constraints - minimum: 0. Example: 4.0, 140.0, 20.0"
+          },
+          "weightShipped": {
+            "type": "number",
+            "description": "Weight of items shipped. Constraints - minimum: 0. Example: 0.0"
+          },
+          "unitPrice": {
+            "type": "number",
+            "description": "Price per unit. Constraints - minimum: 0. Example: 54.0, 11.28, 44.0"
+          },
+          "lineTotal": {
+            "type": "number",
+            "description": "Total amount for this line item. Constraints - minimum: 0. Example: 216.0, 1579.2, 880.0"
+          }
+        }
+      }
+    },
+    "flags": {
+      "type": "string",
+      "description": "Processing status or flags. Constraints - minLength: 1. Example: 'OK'"
+    },
+    "barcodes": {
+      "type": "array",
+      "description": "Array of barcode identifiers. Constraints - minItems: 0, uniqueItems: true",
+      "items": {
+        "type": "string",
+        "description": "Barcode identifiers. Constraints - minLength: 1. Example: 'IN-D000136'"
+      }
+    }
+  }
+}
