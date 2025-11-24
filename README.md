@@ -4,7 +4,7 @@ A implementation for automated **invoice document processing** using Databricks'
 
 ## 🏗️ Solution Architecture
 
-![Architecture Diagram](architecture_diagram.png)
+![Architecture Diagram](F1652125-5E25-4A21-8281-88268338CC66.jpeg)
 
 The solution implements a modern data architecture with the following layers:
 
